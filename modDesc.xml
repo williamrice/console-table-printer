@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<modDesc descVersion="62">
+    <author>lawen4cer</author>
+    <version>1.0.0.0</version>
+
+    <title>
+        <en>Console Table Printer</en>
+    </title>
+
+    <description>
+        <en>A debug tool to print tables dynamically</en>
+    </description>
+
+    <iconFilename>icon.png</iconFilename>
+
+    <multiplayer supported="true" />
+
+    <extraSourceFiles>
+        <sourceFile filename="src/main.lua" />
+    </extraSourceFiles>
+</modDesc>
