@@ -25,15 +25,17 @@ function ConsoleTablePrinter:loadMap()
     addConsoleCommand('setBaseTable', 'Sets the base table', 'setBaseTable', self )
     addConsoleCommand('setDepth', 'Sets the depth for the print recursively', 'setDepth', self)
     addConsoleCommand('printTable', 'Prints table inside base table', 'printTable', self)
-    addConsoleCommand('printMission', 'Prints g_currentMission', 'printMission', self)
 end
 
 function ConsoleTablePrinter:printTable(args)
     print("!!!!!!!!!!!!!" .. tostring(self.baseTable)) -- debug only
 
     local argTable = {}
+    local printTable = {}
+
     if args == nil then
         DebugUtil.printTableRecursively(self.baseTable, "-", 0 , self.depth)
+        return 
     end
 
     for word in string.gmatch(args, '([^.]+)') do
@@ -43,33 +45,28 @@ function ConsoleTablePrinter:printTable(args)
     for i, v in ipairs(argTable) do 
         print("i is : " .. tostring(i) .. " ::: " .. "v is " .. v) -- debug
         if i == 1 then
-            self.baseTable = self.baseTable[v]
+            printTable = self.baseTable[v]
         end
         if i == 2 then
-            self.baseTable = self.baseTable[v]
+            printTable = printTable[v]
         end
         if i == 3 then
-            self.baseTable = self.baseTable[v]
+            printTable = printTable[v]
+        end
+        if i == 4 then
+            printTable = printTable[v]
+        end
+        if i == 5 then
+            printTable = printTable[v]
         end
     end
-
-
-    if type(self.baseTable) == "table" then
-        DebugUtil.printTableRecursively(self.baseTable, "-", 0 , self.depth)
-    else 
-        print(tostring(self.baseTable[args]))
-    end   
-end
-
-function ConsoleTablePrinter:printMission()
-    local tbl = g_currentMission.placeableSystem.placeables
-    for _, v in ipairs(tbl) do
-        DebugUtil.printTableRecursively(v, "-", 0 , self.depth)
-    end    
+    
+    DebugUtil.printTableRecursively(printTable, "-", 0 , self.depth)
 end
 
 function ConsoleTablePrinter:setBaseTable(args)
     self.baseTable = self.baseTablePool[args]
+    print("Print table set to " .. args) 
 end
 
 function ConsoleTablePrinter:setDepth(args)
